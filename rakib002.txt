@@ -1,0 +1,283 @@
+import 'package:flutter/material.dart';
+import 'package:rakib010/login.dart';
+import 'package:rakib010/profile.dart';
+import 'package:rakib010/registation.dart';
+
+void main() {
+  runApp(Mycode());
+}
+
+class Mycode extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      home: Login(),
+      routes: {
+        Registration.id:(context)=>Registration(),
+        Profile.id:(context)=>Profile()
+      },
+    );
+  }
+}
+[login.dart]
+import 'package:flutter/material.dart';
+import 'package:rakib010/profile.dart';
+import 'package:rakib010/registation.dart';
+
+class Login extends StatefulWidget {
+  get context => null;
+
+  @override
+  State<Login> createState() => _LoginState();
+}
+
+class _LoginState extends State<Login> {
+  TextEditingController rakib = TextEditingController();
+  TextEditingController rakibul = TextEditingController();
+  customalartdialog(BuildContext) {
+    return showDialog(
+        context: context,
+        builder: (context) => AlertDialog(
+              backgroundColor: Colors.amber,
+              title: Text('Really you want to delete me?'),
+
+              content:Column(
+                children: [
+                  TextField(
+                    decoration: InputDecoration(
+                      border: OutlineInputBorder(),
+                      labelText: ('id')
+                    ),
+                  ),
+                  TextField( decoration: InputDecoration(
+                    border: OutlineInputBorder(),
+                      labelText: ('pasword')
+                    ),
+
+                  ),
+                ],
+              ),
+
+              actions: [
+                ElevatedButton(
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                    child: Text('No')),
+                ElevatedButton(
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                    child: Text('Yes'))
+              ],
+            ));
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        backgroundColor: (Colors.black),
+        centerTitle: true,
+        title: Text('Login'),
+      ),
+      body: Column(
+        children: [
+         
+            
+          Padding(
+            padding: const EdgeInsets.all(15.0),
+            child: TextField(
+              controller: rakib,
+              
+              decoration: InputDecoration(
+                border:OutlineInputBorder(),
+                label: Text('Email')),
+            ),
+          ),
+          
+          Padding(
+            padding: const EdgeInsets.all(15.0),
+            child: TextField(
+              controller: rakibul,
+              decoration: InputDecoration(
+                border: OutlineInputBorder(),
+                label: Text('Password')),
+            ),
+          ),
+          ElevatedButton(
+              onPressed: () {
+                customalartdialog(context);
+              },
+              child: Text('Login')),
+          SizedBox(
+            height: 15,
+          ),
+          ElevatedButton(
+              onPressed: () {
+                Navigator.pushNamed(context, Registration.id);
+              },
+              child: Text('Create Account')),
+          SizedBox(
+            height: 15,
+          ),
+          ElevatedButton(
+              onPressed: () {
+                Navigator.pushNamed(context, Profile.id);
+              },
+              child: Text('Profile')),
+          SizedBox(
+            height: 15,
+          ),
+          ElevatedButton(
+              onPressed: () {
+                setState(() {});
+              },
+              child: Text('Get valu')),
+          Text(rakib.text),
+          Text(rakibul.text)
+        ],
+      ),
+    );
+  }
+}
+
+
+[registation.dart]
+import 'package:flutter/material.dart';
+class Registration extends StatelessWidget{
+  static String id= 'registration';
+ 
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Registration'),
+      ),
+      body: Column(
+        children: [
+          TextField(
+            
+            decoration: InputDecoration(
+              label: Text('Name')
+            ),
+          ),
+           TextField(
+            decoration: InputDecoration(
+              label: Text('Phone')
+            ),
+          ),
+           TextField(
+            decoration: InputDecoration(
+              label: Text('Address')
+            ),
+          ),
+          ElevatedButton(onPressed: (){
+            Navigator.pop(context);
+          }, child:Text('Submit'))
+        ],
+      ),
+    );
+  }
+
+}
+
+[profile.dart]
+import 'package:flutter/material.dart';
+class Profile extends StatefulWidget{
+  static String id= 'Profile';
+
+  @override
+  State<Profile> createState() => _ProfileState();
+}
+
+class _ProfileState extends State<Profile> {
+ customalartdialog(BuildContext) {
+    return showDialog(
+        context: context,
+        builder: (context) => AlertDialog(
+              backgroundColor: Colors.amber,
+              title: Text('Really you want to delete me?'),
+
+              content:Column(
+                children: [
+                  TextField(
+                    decoration: InputDecoration(
+                      border: OutlineInputBorder(),
+                      labelText: ('id')
+                    ),
+                  ),
+                  TextField( decoration: InputDecoration(
+                    border: OutlineInputBorder(),
+                      labelText: ('pasword')
+                    ),
+
+                  ),
+                ],
+              ),
+
+              actions: [
+                ElevatedButton(
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                    child: Text('No')),
+                ElevatedButton(
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                    child: Text('Yes'))
+              ],
+            ));
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Profile'),
+      ),
+      drawer:Drawer(
+        child: ListView(children: [
+          DrawerHeader(
+            child:Column(
+              children: [
+                CircleAvatar(
+                  minRadius: 50,
+                  maxRadius: 50,
+                  backgroundImage: NetworkImage(
+                    'https://upload.wikimedia.org/wikipedia/en/thumb/3/3c/Chris_Hemsworth_as_Thor.jpg/220px-Chris_Hemsworth_as_Thor.jpg',
+                    
+                  ),
+                 
+                  
+                ),Text('MD Thor'),
+                Text('mdthor456@gmail.com')
+              ],
+            ),
+            decoration: BoxDecoration(color: Colors.grey),
+          ),
+          ListTile(
+            onTap:(){},
+            title: Text('Your channel'),)
+        ],),
+      ),
+      body: Column(
+        children: [
+          Padding(
+            padding: const EdgeInsets.all(15.0),
+            child: TextField(
+              
+              
+              decoration: InputDecoration(
+                border:OutlineInputBorder(),
+                label: Text('Email')),
+            ),
+          ),
+        ],
+      )
+      
+    );
+  }
+}
